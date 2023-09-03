@@ -246,11 +246,3 @@ impl HasWindowHandle for WindowHandle<'_> {
         Ok(*self)
     }
 }
-
-/// ```compile_fail
-/// use raw_window_handle::{DisplayHandle, WindowHandle};
-/// fn _assert<T: Send + Sync>() {}
-/// _assert::<DisplayHandle<'static>>();
-/// _assert::<WindowHandle<'static>>();
-/// ```
-fn _not_send_or_sync() {}

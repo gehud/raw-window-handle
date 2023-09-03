@@ -451,3 +451,25 @@ from_impl!(RawWindowHandle, WinRt, WinRtWindowHandle);
 from_impl!(RawWindowHandle, Web, WebWindowHandle);
 from_impl!(RawWindowHandle, AndroidNdk, AndroidNdkWindowHandle);
 from_impl!(RawWindowHandle, Haiku, HaikuWindowHandle);
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use core::marker::Unpin;
+    use core::panic::{RefUnwindSafe, UnwindSafe};
+    use static_assertions::{assert_impl_all, assert_not_impl_any};
+
+    #[test]
+    fn marker_traits() {
+        assert_impl_all!(DisplayHandle<'_>: UnwindSafe, RefUnwindSafe, Unpin);
+        assert_not_impl_any!(DisplayHandle<'_>: Send, Sync);
+        assert_impl_all!(WindowHandle<'_>: UnwindSafe, RefUnwindSafe, Unpin);
+        assert_not_impl_any!(WindowHandle<'_>: Send, Sync);
+
+        assert_impl_all!(RawDisplayHandle: UnwindSafe, RefUnwindSafe, Unpin);
+        assert_not_impl_any!(RawDisplayHandle: Send, Sync);
+        assert_impl_all!(RawWindowHandle: UnwindSafe, RefUnwindSafe, Unpin);
+        assert_not_impl_any!(RawWindowHandle: Send, Sync);
+    }
+}
