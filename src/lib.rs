@@ -472,4 +472,16 @@ mod tests {
         assert_impl_all!(RawWindowHandle: UnwindSafe, RefUnwindSafe, Unpin);
         assert_not_impl_any!(RawWindowHandle: Send, Sync);
     }
+
+    #[allow(dead_code)]
+    fn test_object_safety_window_handle(_: &dyn HasWindowHandle) {}
+
+    #[allow(dead_code)]
+    fn test_object_safety_raw_window_handle(_: &dyn HasRawWindowHandle) {}
+
+    #[allow(dead_code)]
+    fn test_object_safety_display_handle(_: &dyn HasDisplayHandle) {}
+
+    #[allow(dead_code)]
+    fn test_object_safety_raw_display_handle(_: &dyn HasRawDisplayHandle) {}
 }
