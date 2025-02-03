@@ -11,7 +11,11 @@ readme = "README.md"
 documentation = "https://docs.rs/raw-window-handle"
 rust-version = "1.64"
 
+[lib]
+crate-type = ["rlib", "dylib"]
+
 [features]
+default = ["std"]
 alloc = []
 std = ["alloc"]
 
